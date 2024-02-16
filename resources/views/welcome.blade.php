@@ -1,4 +1,4 @@
-@extends('layouts.app-user')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-        @if (Route::has('login'))
+        {{-- @if (Route::has('login'))
         <div class="col-md-3">
             <a href="{{route('login')}}" class="text-decoration-none card bg-warning border-0 pt-5 pb-4 my-shadow" style="border-radius: 20px">
                 <div class="card-img-top text-center mb-3">
@@ -21,8 +21,8 @@
                 </div>
             </a>
         </div>
-        @endif
-        <div class="col-md-3">
+        @endif --}}
+        <div class="col-md-4">
             <a href="{{route('booking-lapangan')}}" class="text-decoration-none card bg-warning border-0 pt-5 pb-4 my-shadow" style="border-radius: 20px">
                 <div class="card-img-top text-center mb-3">
                     <div style="width: 80px; height: 80px;background: #fff;border-radius: 50%;" class="mx-auto p-3">
@@ -34,7 +34,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{route('cek-jadwal')}}" class="text-decoration-none card bg-warning border-0 pt-5 pb-4 my-shadow" style="border-radius: 20px">
                 <div class="card-img-top text-center mb-3">
                     <div style="width: 80px; height: 80px;background: #fff;border-radius: 50%;" class="mx-auto p-3">
@@ -46,7 +46,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{route('cek-pembayaran')}}" class="text-decoration-none card bg-warning border-0 pt-5 pb-4 my-shadow" style="border-radius: 20px">
                 <div class="card-img-top text-center mb-3">
                     <div style="width: 80px; height: 80px;background: #fff;border-radius: 50%;" class="mx-auto p-3">

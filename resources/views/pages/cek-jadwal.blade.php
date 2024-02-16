@@ -13,17 +13,25 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Pemesan</th>
-                                <th>Tanggal Booking</th>
+                                <th>Tanggal</th>
+                                <th>Jam</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($bookings as $key => $booking)
+                            @if (count($bookings) == 0)
                                 <tr>
-                                    <td> {{++$key}} </td>
-                                    <td> {{ $booking->namalengkap }} </td>
-                                    <td> {{ date('d F Y', strtotime($booking->tanggal_booking)) }} </td>
+                                    <td colspan="4" class="text-center">Tidak ada data</td>
                                 </tr>
-                            @endforeach
+                            @else
+                                @foreach ($bookings as $key => $booking)
+                                    <tr>
+                                        <td> {{ ++$key }} </td>
+                                        <td> {{ $booking->namalengkap }} </td>
+                                        <td> {{ date('d F Y', strtotime($booking->tanggal_booking)) }} </td>
+                                        <td> {{ date('H:i', strtotime($booking->tanggal_booking)) }} </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
 

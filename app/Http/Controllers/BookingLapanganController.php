@@ -20,6 +20,7 @@ class BookingLapanganController extends Controller
             "nohp" => 'required|min:12|max:13',
             "namalengkap" => 'required|max:255',
             "tanggal_booking" => 'required|date',
+            "durasi" => 'required',
             "pembayaran" => 'required',
         ]);
 
@@ -44,6 +45,7 @@ class BookingLapanganController extends Controller
                 'kode_transaksi' => strtoupper($kode_transaksi),
                 'tanggal_booking' => $request->tanggal_booking,
                 'nohp' => $request->nohp,
+                'durasi' => $request->durasi,
                 'namalengkap' => strtoupper($request->namalengkap),
                 'pembayaran' => $request->pembayaran,
             ]);

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-user')
 
 @section('content')
 <div class="container">
@@ -59,9 +59,12 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Lupa Password?') }}
                                     </a>
                                 @endif
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    {{ __('Belum Punya Akun? Register') }}
+                                </a>
                             </div>
                         </div>
                     </form>

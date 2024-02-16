@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_transaksi')->unique();
-            $table->dateTime('tanggal_booking');
-            $table->string('nohp');
-            $table->string('namalengkap');
-            $table->string('pembayaran');
-            $table->string('bukti')->nullable();
-            $table->integer('status')->default(0);
+            $table->string('role_name');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('roles');
     }
 };

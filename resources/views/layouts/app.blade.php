@@ -64,12 +64,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link @if (Route::currentRouteName() == 'home') active @endif" aria-current="page">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('booking')}}" class="nav-link @if (Route::currentRouteName() == 'booking') active @endif">Booking</a>
-                        </li>
+                        @if (Auth::check() && Auth::user()->role_id == 1)
+                            <li class="nav-item">
+                                <a href="{{ route('home') }}"
+                                    class="nav-link @if (Route::currentRouteName() == 'home') active @endif"
+                                    aria-current="page">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user') }}"
+                                    class="nav-link @if (Route::currentRouteName() == 'user') active @endif">Pengguna</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('booking') }}"
+                                    class="nav-link @if (Route::currentRouteName() == 'booking') active @endif">Booking</a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
