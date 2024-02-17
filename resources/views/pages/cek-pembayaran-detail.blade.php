@@ -32,12 +32,16 @@
                             <th>: {{ $booking->namalengkap }}</th>
                         </tr>
                         <tr>
+                            <td>Durasi Dan Harga</td>
+                            <th>: {{ $booking->durasi }}</th>
+                        </tr>
+                        <tr>
                             <td>Metode Pembayaran</td>
-                            <th class="@if ($booking->pembayaran == 'Online') text-success @else text-danger @endif">: {{ $booking->pembayaran }}</th>
+                            <th class="@if ($booking->pembayaran != 'Manual') text-success @else text-danger @endif">: {{ $booking->pembayaran }}</th>
                         </tr>
                     </table>
 
-                    @if ($booking->status == 2 && $booking->pembayaran == 'Online')
+                    @if ($booking->status == 2 && $booking->pembayaran != 'Manual')
                         <div class="mt-4">
                             <a href="{{ route('hasil-pembayaran', $booking->kode_transaksi) }}"
                                 class="btn btn-primary px-4">Upload

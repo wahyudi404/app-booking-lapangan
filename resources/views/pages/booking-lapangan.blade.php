@@ -37,9 +37,9 @@
                         <label for="durasi" class="form-label">Pilih Durasi Booking</label>
                         <select id="durasi" name="durasi" class="form-select @error('durasi') is-invalid @enderror" aria-label="Default select example">
                             <option selected value="">-- Pilih Satu --</option>
-                            @for ($durasi = 1; $durasi <= 3; $durasi++)
-                            <option value="{{$durasi}} Jam">{{$durasi}} Jam</option>
-                            @endfor
+                            <option value="1 Jam Rp. 15.000">1 Jam Rp. 15.000</option>
+                            <option value="2 Jam Rp. 25.000">2 Jam Rp. 25.000</option>
+                            <option value="3 Jam Rp. 50.000">3 Jam Rp. 50.000</option>
                         </select>
                         @error('durasi')
                             <span class="invalid-feedback">{{ $message }}</span>

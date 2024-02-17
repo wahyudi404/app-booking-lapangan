@@ -48,14 +48,17 @@
                                             </span>
                                         </td>
                                         <td>
-                                            {{-- get image bukti in storage --}}
-                                            @if ($booking->bukti == null)
-                                                <span class="text-danger">Belum ada bukti</span>
+                                            @if ($booking->pembayaran != 'Manual')
+                                                @if ($booking->bukti == null)
+                                                    <span class="text-danger">Belum ada bukti</span>
+                                                @else
+                                                    <a href="{{ asset('storage/bukti/' . $booking->bukti) }}" target="_blank">
+                                                        <img width="100" src="{{ url('storage/bukti/' . $booking->bukti) }}"
+                                                            alt="{{ $booking->bukti }}" />
+                                                    </a>
+                                                @endif
                                             @else
-                                                <a href="{{ asset('storage/bukti/' . $booking->bukti) }}" target="_blank">
-                                                    <img width="100" src="{{ url('storage/bukti/' . $booking->bukti) }}"
-                                                        alt="{{ $booking->bukti }}" />
-                                                </a>
+                                            <span class="text-success fw-bold">Manual</span>
                                             @endif
                                         </td>
                                         <td>

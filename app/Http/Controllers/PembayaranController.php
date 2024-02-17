@@ -46,7 +46,7 @@ class PembayaranController extends Controller
     {
         $booking = Booking::select('bukti', 'pembayaran', 'status')->where('kode_transaksi', $kode)->first();
 
-        if($booking->status != 2 && $booking->pembayaran == 'Online' && !empty($booking->bukti)) {
+        if($booking->status != 2 && $booking->pembayaran != 'Manual' && !empty($booking->bukti)) {
             return redirect()->route('cek-pembayaran-detail', ['kode' => $kode])->with('error', 'Pembayaran telah dibayar atau sedang diproses!');
         }
         return view('pages.hasil-pembayaran', [
@@ -65,7 +65,7 @@ class PembayaranController extends Controller
         try {
             $booking = Booking::select('bukti', 'pembayaran', 'status')->where('kode_transaksi', $request->kode_transaksi)->first();
 
-            if($booking->status != 2 && $booking->pembayaran == 'Online' && !empty($booking->bukti)) {
+            if($booking->status != 2 && $booking->pembayaran != 'Manual' && !empty($booking->bukti)) {
                 return redirect()
                     ->route('cek-pembayaran-detail', ['kode' => $request->kode_transaksi])
                     ->with('error', 'Pembayaran telah dibayar atau sedang diproses!');

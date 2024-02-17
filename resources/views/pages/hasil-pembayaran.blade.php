@@ -3,7 +3,7 @@
 @section('content')
     <div style="min-height: 100vh;display: flex;align-items: center;justify-content: center">
         <div class="card w-card my-shadow border" style="border-radius: 20px">
-            @if ($pembayaran == 'Online')
+            @if ($pembayaran != 'Manual')
                 <div class="card-body p-4 text-center">
                     <div class="mb-3">
                         <h2><b>Pembayaran Online</b></h2>
@@ -29,7 +29,7 @@
                         </div>
                     </form>
                 </div>
-            @elseif ($pembayaran == 'Offline')
+            @elseif ($pembayaran == 'Manual')
                 <div class="card-body py-4 text-center">
                     <div class="mb-3">
                         <h2 class="text-center"><b>Booking Berhasil</b></h2>
