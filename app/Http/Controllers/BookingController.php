@@ -39,4 +39,23 @@ class BookingController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function updateBookingNew($id)
+    {
+        try {
+            $booking = Booking::find($id);
+            $booking->old = 1;
+            $booking->save();
+
+            return redirect()->route('booking')->with('kode_transaksi', $booking->kode_transaksi);
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function rekap()
+    {
+        $bookings = Booking::where('status', 1)->get();
+        return view('pages.admin.rekap_pendapatan', compact('bookings'));
+    }
 }

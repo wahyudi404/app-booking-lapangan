@@ -12,8 +12,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $user = User::orderBy('created_at', 'desc');
+        $users = $user->get();
         $roles = Role::all();
+
         return view('pages.admin.user', compact('users', 'roles'));
     }
 

@@ -33,6 +33,10 @@
 
 <body>
     <div id="app">
+        @php
+            $newBookings = App\Models\Booking::where('old', 0)->orderBy('created_at', 'desc')->get();
+        @endphp
+
         {{-- Alert Success --}}
         @if (Session::has('success'))
             <div class="fixed-top alert alert-success alert-dismissible fade show mx-5 my-4" role="alert">
@@ -79,11 +83,56 @@
                                 <a href="{{ route('booking') }}"
                                     class="nav-link @if (Route::currentRouteName() == 'booking') active @endif">Booking</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('booking.rekap_pendapatan') }}"
+                                    class="nav-link @if (Route::currentRouteName() == 'booking.rekap_pendapatan') active @endif">Rekap Pendapatan</a>
+                            </li>
                         @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        @if (Auth::check() && Auth::user()->role_id == 1)
+                            <li class="nav-item dropdown">
+                                <a id="notifDropdown" class="nav-link dropdown-toggle position-relative" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+                                    @if (isset($newBookings) && count($newBookings))
+                                        <span class="badge badge-pill bg-danger">{{ count($newBookings) }}</span>
+                                    @endif
+                                    <i class="fa fa-bell"></i>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="notifDropdown">
+                                    @if (isset($newBookings) && count($newBookings))
+                                        @foreach ($newBookings as $key => $booking)
+                                            @if ($key < 3)
+                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('form-booking-{{ $booking->id }}').submit();">
+                                                    <div class="d-flex justify-content-between gap-5">
+                                                        <span class="fw-bold fs-6">{{ $booking->namalengkap }}</span>
+                                                        <span class="text-sm text-secondary">{{ date('d/M/Y', strtotime($booking->tanggal_booking)) }}</span>
+                                                    </div>
+                                                    <span class="text-sm">{{ $booking->nohp }}</span>
+                                                </a>
+
+                                                <form id="form-booking-{{ $booking->id }}" action="{{ route('booking.update.new', $booking->id)}}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                </form>
+                                            @endif
+                                        @endforeach
+                                        <hr>
+                                        <a class="dropdown-item text-center" href="{{ route('user') }}">
+                                            View All
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item text-center" href="{{ route('user') }}">
+                                            No New Users
+                                        </a>
+                                    @endif
+                                </div>
+                            </li>
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

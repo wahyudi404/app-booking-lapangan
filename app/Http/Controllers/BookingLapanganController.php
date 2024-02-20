@@ -41,11 +41,25 @@ class BookingLapanganController extends Controller
                 $kode_transaksi = $this->generateRandomString();
             }
 
+            $durasi = "";
+            $harga = 0;
+            if($request->durasi == 1) {
+                $durasi = "1 Jam";
+                $harga = 15000;
+            }else if($request->durasi == 2) {
+                $durasi = "2 Jam";
+                $harga = 25000;
+            }else if($request->durasi == 3) {
+                $durasi = "3 Jam";
+                $harga = 50000;
+            }
+
             Booking::create([
                 'kode_transaksi' => strtoupper($kode_transaksi),
                 'tanggal_booking' => $request->tanggal_booking,
                 'nohp' => $request->nohp,
-                'durasi' => $request->durasi,
+                'durasi' => $durasi . " Rp. " . number_format($harga, 0, ".", "."),
+                'harga' => $harga,
                 'namalengkap' => strtoupper($request->namalengkap),
                 'pembayaran' => $request->pembayaran,
             ]);

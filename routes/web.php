@@ -53,7 +53,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::prefix('booking')->group(function () {
         Route::get('', [BookingController::class, 'index'])->name('booking');
         Route::post('/update-status', [BookingController::class, 'updateStatus'])->name('update-status');
+        Route::put('/{id}/new-booking', [BookingController::class, 'updateBookingNew'])->name('booking.update.new');
     });
+
+    Route::get('rekap-pendapatan', [BookingController::class, 'rekap'])->name('booking.rekap_pendapatan');
 });
 
 

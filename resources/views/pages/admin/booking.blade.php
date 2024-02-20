@@ -89,6 +89,16 @@
     <script>
         new DataTable('#datatable');
 
+        $(document).ready(function() {
+            let hasKodetransaksi = "{{Session::has('kode_transaksi')}}";
+
+            if (hasKodetransaksi) {
+                let getKodetransaksi = "{{Session::get('kode_transaksi')}}";
+                // prioritized datatable by kode_transaksi
+                $('#datatable').DataTable().search(getKodetransaksi).draw();
+            }
+        })
+
         const btnActions = $('.btn-action');
         btnActions.click(function() {
             const id = $(this).data('id');
